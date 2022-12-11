@@ -1,3 +1,8 @@
+<?php
+require_once ("getData.php");
+require_once ("pdo.php");
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -19,13 +24,28 @@
         ?>
     </div>
     <?php
-        require_once("getData.php");
-        $getData = new getData();
-        $records = $getData->query('SELECT * FROM users');
-        while ($record = $records->fetch()) {
-        print($record['id'] . "\n");
-        }
+    try {
+        $users_data = getUserData();
+        $stt = $users_data->query($this);
+        $this->execute();
+        //while($row = $this->fetch(PDO:FETCH_ASSOC))
+    } catch(PDOException $e) {
+        echo 'Error: ' . $e->getMessage();
+        die();
+    }
+        //while($row = $stt->fetch(PDO:FETCH_ASSOC)){
+            /*
+            <tr>
+            <td><?=e($row['id']) ?></td>
+            </tr>
+            */
+        //}
+            $stt->setFetchMode(PDO::FETCH_ASSOC);
+            foreach ($stt as $row) {
+                # code...
+            }
     ?>
+
     <div class="footer">
         <p2>Y&I group.inc</p2>
     </div>
@@ -73,4 +93,9 @@
 </body>
 </html>
     <img src="images/logo.png"alt="" /></div>
-*/
+
+        $records = $getData->query($users_data);
+        while ($record = $records->fetch()) {
+        print($record['id'] . "\n");
+
+    */
