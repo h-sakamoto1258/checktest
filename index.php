@@ -33,25 +33,77 @@ $post_data['comment'];
         echo '最終ログイン日：',date('Y-m-d H:i:s');
         ?>
     </div>
-<div class="main1"></div>
-    <table border="1">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>記事ID</th>
+                <th>タイトル</th>
+                <th>カテゴリ</th>
+                <th>本文</th>
+                <th>投稿日</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            try {
+                $stt = $db->prepare('SELECT = FROM posts ORDER BY published DESC');
+                $stt->execute();
+                while($row = $stt->fetch(PDO::FETCH_ASSOC)) {
+            ?>
+            <tr>
+                <td><?=e($post_data['id']) ?></td>
+                <td><?=e($post_data['title']) ?></td>
+                <td><?=e($post_data['created']) ?></td>
+                <td><?=e($post_data['category_no']) ?></td>
+                <td><?=e($post_data['comment']) ?></td>
+            </tr>
+            <?php
+                }
+            } catch(PDOException $e) {
+                echo 'Error: ' . $e->getMessage();
+                die();
+                }
+            ?>
+            </thead>
+            </table>
+            <div class="footer">
+            <p2>Y&I group.inc</p2>
+            </div>
+            </body>
+            </html>
+
+<?php
+/*
+    <div class="main"></div>
+    <table border="1" align="center">
+    <tr bgcolor="#CCFFFF">
+        <th width="auto">記事ID</th>
+        <th width="auto">タイトル</th>
+        <th width="auto">カテゴリ</th>
+        <th width="auto">本文</th>
+        <th width="auto">投稿日</th>
+    </tr>
+    <?php foreach ($post_date as $key => $value) : { ?>
         <tr>
-            <th>記事ID</th>
-            <th>タイトル</th>
-            <th>カテゴリ</th>
-            <th>本文</th>
-            <th>投稿日</th>
+            <td>
+                <?=$key ?>
+            </td>
         </tr>
+    <?php } ?>
     </table>
-<div class="main2"></div>
-    <table border="1">
-        <tr>
-            <?php foreach ($post as $post) : ?>
+            <?php /*foreach ($post_date as $post_data) ; 
             <td><?= $post_data['id']?></td>
             <td><?= $post_data['title']?></td>
             <td><?= $post_data['created']?></td>
             <td><?= $post_data['category_no']?></td>
             <td><?= $post_data['comment']?></td>
+            
+            ?>
+            <?php
+            foreach ($post_date as $key => $value) {
+                echo $key. ':'. $value.'<br/>';
+            }
+            ?>
         </tr>
         <?php //endforeach ?>
     </table>
@@ -96,9 +148,4 @@ $post_data['comment'];
             <td>$id</td><td>$title</td><td>$category_no</td><td>$comment</td><td>$created</td>
         </table>
         */
-        ?>
-    <div class="footer">
-        <p2>Y&I group.inc</p2>
-    </div>
-</body>
-</html>
+?>

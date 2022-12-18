@@ -22,7 +22,7 @@ class getData{
         $users_data = $this->pdo->query($getusers_sql)->fetch(PDO::FETCH_ASSOC);
         return $users_data;
     }
-    
+
     /**
      * 記事情報の取得
      *
