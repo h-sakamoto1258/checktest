@@ -7,6 +7,10 @@
     float: left;
 }
 
+.header_main {
+    justify-content: flex-start;
+}
+
 .img {
     justify-content: center;
 }
@@ -31,10 +35,6 @@ p{
     background-color: #00ffff;
     justify-content: center;
     text-align: right;
-}
-
-.main {
-    background-color: #87ceeb;
 }
 
 .footer {
