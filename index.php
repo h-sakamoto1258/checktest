@@ -35,34 +35,39 @@ $post_data = $db->getPostData();
         ?>
         </div>
     <table border="1">
+        <div class="th">
         <tr>
             <th>記事ID</th>
             <th>タイトル</th>
             <th>カテゴリ</th>
             <th>本文</th>
             <th>投稿日</th>
+            </div>
         </tr>
             <?php
-            try {
-                //$stt = $db->prepare("SELECT * FROM posts ORDER BY id desc");
-                $stt = $db->query("SELECT * FROM posts ORDER BY id desc");
-                //$stt->execute();
-                foreach($stt as $post_data) {
+            //$stt = $db->prepare("SELECT * FROM posts ORDER BY id desc");
+            //$stt = $db->query("SELECT * FROM posts ORDER BY id desc");
+            //$stt->execute();
+            foreach($post_data as $value) {
             ?>
             <tr>
-                    <td><?=e($post_data['id']) ?></td>
-                    <td><?=e($post_data['title']) ?></td>
-                    <td><?=e($post_data['created']) ?></td>
-                    <td><?=e($post_data['category_no']) ?></td>
-                    <td><?=e($post_data['comment']) ?></td>
-            </tr>
-            <?php
+                <?php
+                /*<td><?=e($post_data['id']) ?></td>
+                <td><?=e($post_data['title']) ?></td>
+                <td><?=e($post_data['created']) ?></td>
+                <td><?=e($post_data['category_no']) ?></td>
+                <td><?=e($post_data['comment']) ?></td>
+                */
+                ?>
+                <td><?php echo $value['id'] ?></td>
+                <td><?php echo $value['title'] ?></td>
+                <td><?php echo $value['category_no'] ?></td>
+                <td><?php echo $value['comment'] ?></td>
+                <td><?php echo $value['created'] ?></td>
+                <?php
                 }
-            } catch(PDOException $e) {
-                echo 'Error: ' . $e->getMessage();
-                die();
-            }
-            ?>
+                ?>
+            </tr>
             </table>
             <div class="footer">
             <p2>Y&I group.inc</p2>

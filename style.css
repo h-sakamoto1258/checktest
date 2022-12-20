@@ -37,6 +37,11 @@ p{
     text-align: right;
 }
 
+.th {
+    background: #87ceeb;
+    justify-content: center;
+}
+
 .footer {
     margin: 0;
     width: 1000px;
